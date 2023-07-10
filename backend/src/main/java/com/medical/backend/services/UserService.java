@@ -13,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.nio.CharBuffer;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -57,4 +59,29 @@ public class UserService {
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
         return _mapper.toUserDto(user);
     }
+
+
+    public List<UserDto> findAll(){
+        return _mapper.userListToUserDtoList(_userRepository.findAll());
+    }
+
+
+    public UserDto findById(Long id){
+        User user =_userRepository.findById(id)
+                .orElseThrow(NoSuchElementException::new);
+        return _mapper.toUserDto(user);
+
+    }
+
+    public UserDto deleteById(Long id){
+        User user =_userRepository.findById(id)
+                .orElseThrow(NoSuchElementException::new);
+
+        _userRepository.deleteById(id);
+        return _mapper.toUserDto(user);
+    }
+
+
+
+
 }

@@ -1,5 +1,9 @@
 package com.medical.backend.dtos;
 
+import com.medical.backend.entities.Specialty;
+
+import java.util.List;
+
 public class UserDto {
 
     private Long id;
@@ -15,6 +19,17 @@ public class UserDto {
     private String phone;
 
     private String token;
+
+
+    private List<SpecialtyDto> specialties;
+
+    public List<SpecialtyDto> getSpecialties() {
+        return specialties;
+    }
+
+    public void setSpecialties(List<SpecialtyDto> specialties) {
+        this.specialties = specialties;
+    }
 
     public Long getId() {
         return id;

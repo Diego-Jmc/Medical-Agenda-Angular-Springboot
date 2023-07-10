@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -30,6 +32,18 @@ public class User {
     private String location;
 
     private String phone;
+
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_specialty",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "specialty_id")
+    )
+    private List<Specialty> specialties;
+
+
 
     public Long getId() {
         return id;
